@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace VisitedCitiesApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [JwtAuthorize("User")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

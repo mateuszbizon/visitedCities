@@ -1,25 +1,50 @@
+using VisitedCitiesApi.Middlewares;
+using VisitedCitiesApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+ServicesConfigurator.ConfigureSwagger(builder);
+ServicesConfigurator.ConfigureDatabase(builder);
+ServicesConfigurator.ConfigureIdentity(builder);
+ServicesConfigurator.ConfigureServices(builder.Services);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corspolicy",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
+});
+
+configuration = builder.Configuration;
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseCors("corspolicy");
+
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<ServiceResponseMiddleware>();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
 app.Run();
+
+public partial class Program
+{
+    public static IConfiguration configuration { get; private set; }
+}
