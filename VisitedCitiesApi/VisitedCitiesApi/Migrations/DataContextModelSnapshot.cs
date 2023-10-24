@@ -162,19 +162,6 @@ namespace VisitedCitiesApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Commune = "Głusk",
-                            District = "lubelski",
-                            Latitude = 51.190163058783824,
-                            Longitude = 22.628096340156684,
-                            Name = "Abramowice Kościelne",
-                            Province = "lubelskie",
-                            Type = "village"
-                        });
                 });
 
             modelBuilder.Entity("VisitedCitiesApi.Models.Identity.AppRole", b =>
@@ -210,14 +197,14 @@ namespace VisitedCitiesApi.Migrations
                         new
                         {
                             Id = 1L,
-                            ConcurrencyStamp = "0d3a7741-e50b-435b-951e-03d6feeda3d0",
+                            ConcurrencyStamp = "1537be10-75c3-4d38-b928-565f664cf6db",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2L,
-                            ConcurrencyStamp = "4cd78168-a9f9-4f31-b10e-0864758c3798",
+                            ConcurrencyStamp = "d7771bb7-ac2d-4bf4-9acf-eb6cff1ad188",
                             Name = "User",
                             NormalizedName = "USER"
                         });

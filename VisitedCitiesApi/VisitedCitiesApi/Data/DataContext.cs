@@ -16,7 +16,7 @@ namespace VisitedCitiesApi.Data
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var connectionString = configuration.GetConnectionString("VisitedCitiesDBConnection");
+            var connectionString = Program.configuration["VisitedCitiesDBConnectionAzure"];
             optionsBuilder.UseSqlServer(connectionString);
 
             optionsBuilder.EnableSensitiveDataLogging();
@@ -27,10 +27,6 @@ namespace VisitedCitiesApi.Data
             modelBuilder.Entity<AppRole>().HasData(
                 new AppRole { Id = 1, Name = "Admin", NormalizedName = "ADMIN" },
                 new AppRole { Id = 2, Name = "User", NormalizedName = "USER" }
-                );
-
-            modelBuilder.Entity<Location>().HasData(
-                new Location { Id = 1, Name = "Abramowice Kościelne", Type = "village", Commune = "Głusk", District = "lubelski", Province = "lubelskie",Latitude= 51.190163058783824, Longitude = 22.628096340156684 }
                 );
 
             base.OnModelCreating(modelBuilder);
