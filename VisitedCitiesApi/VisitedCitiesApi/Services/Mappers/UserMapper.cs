@@ -1,4 +1,4 @@
-﻿namespace VisitedCitiesApi.Models.Services.Mappers
+﻿namespace VisitedCitiesApi.Services.Mappers
 {
     public class UserMapper : MapperService<AppUser, UserModel>, IUserMapper
     {

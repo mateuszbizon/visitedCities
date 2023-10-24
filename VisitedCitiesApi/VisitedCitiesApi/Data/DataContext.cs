@@ -1,4 +1,6 @@
-﻿namespace VisitedCitiesApi.Data
+﻿using VisitedCitiesApi.Models.Database;
+
+namespace VisitedCitiesApi.Data
 {
     public class DataContext : IdentityDbContext<AppUser, AppRole, long>
     {
@@ -6,13 +8,15 @@
         {
         }
 
+        public DbSet<Location> Locations { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var connectionString = configuration.GetConnectionString("VisitedCitiesDBConnection");
+            var connectionString = Program.configuration["VisitedCitiesDBConnectionAzure"];
             optionsBuilder.UseSqlServer(connectionString);
 
             optionsBuilder.EnableSensitiveDataLogging();

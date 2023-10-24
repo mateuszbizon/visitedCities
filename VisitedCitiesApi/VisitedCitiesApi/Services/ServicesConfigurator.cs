@@ -15,7 +15,7 @@
         public static void ConfigureDatabase(WebApplicationBuilder builder)
         {
             builder.Services.AddDbContext<DataContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("VisitedCitiesDBConnection")), contextLifetime: ServiceLifetime.Scoped);
+            options.UseSqlServer(Program.configuration["VisitedCitiesDBConnectionAzure"]), contextLifetime: ServiceLifetime.Scoped);
         }
 
         public static void ConfigureSwagger(WebApplicationBuilder builder)

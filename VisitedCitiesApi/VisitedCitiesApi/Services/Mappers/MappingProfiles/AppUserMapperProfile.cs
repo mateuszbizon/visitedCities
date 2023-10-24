@@ -1,4 +1,4 @@
-﻿namespace VisitedCitiesApi.Models.Services.Mappers.MappingProfiles
+﻿namespace VisitedCitiesApi.Services.Mappers.MappingProfiles
 {
     public class AppUserMapperProfile : Profile
     {
