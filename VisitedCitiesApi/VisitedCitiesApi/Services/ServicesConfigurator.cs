@@ -7,9 +7,11 @@
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(ILocationRepository), typeof(LocationRepository));
 
             services.AddScoped(typeof(IUserMapper), typeof(UserMapper));
             services.AddScoped(typeof(IAccountService), typeof(AccountService));
+            services.AddScoped(typeof(ILocationsService), typeof(LocationsService));
         }
 
         public static void ConfigureDatabase(WebApplicationBuilder builder)
