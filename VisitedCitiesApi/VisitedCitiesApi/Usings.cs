@@ -21,5 +21,5 @@ global using VisitedCitiesApi.Interfaces.Services;
 global using VisitedCitiesApi.Interfaces.Services.Mappers;
 global using VisitedCitiesApi.Models.Identity;
 global using VisitedCitiesApi.Models.Services;
-global using VisitedCitiesApi.Models.Services.Mappers;
 global using VisitedCitiesApi.Repositories;
+global using VisitedCitiesApi.Services.Mappers;

@@ -1,4 +1,4 @@
-﻿namespace VisitedCitiesApi.Models.Services.Mappers
+﻿namespace VisitedCitiesApi.Services.Mappers
 {
     public class MapperService<D, C> : IMapperService<D, C> where D : IDatabaseModel where C : IClientModel
     {
