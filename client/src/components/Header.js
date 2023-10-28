@@ -1,10 +1,15 @@
 import React from 'react'
 
-function Header() {
+function Header({ listActive, setListActive }) {
+
+    function handleListActive() {
+        setListActive(!listActive);
+    }
+
   return (
     <div className='map-header'>
         <div className='map-header__logo-side'>
-            <i className="fa-solid fa-bars map-header__icon"></i>
+            <i className="fa-solid fa-bars map-header__icon map-header__burger-icon" onClick={handleListActive}></i>
             <h2>visitedCities</h2>
         </div>
         <div className="map-header__right-side">
