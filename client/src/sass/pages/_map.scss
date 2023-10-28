@@ -1,0 +1,71 @@
+@use "../abstract/variables" as *;
+
+.map {
+    height: 100vh;
+}
+
+.map-header {
+    height: $map-header-height;
+    background-color: #fff;
+    padding: 0 15px;
+    display: flex;
+
+    &__logo-side {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__right-side {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__icon {
+        position: relative;
+        font-size: 22px;
+        cursor: pointer;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -7px;
+            background-color: rgb(128, 128, 128, 0.2);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            opacity: 0;
+        }
+
+        &:hover::after {
+            opacity: 1;
+        }
+    }
+
+    &__link {
+        display: none;
+        color: #000;
+        text-decoration: none;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .map-header {
+        padding: 0 100px;
+
+        &__logout-icon {
+            display: none;
+        }
+
+        &__link {
+            display: block;
+        }
+    }
+}
