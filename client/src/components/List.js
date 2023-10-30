@@ -3,15 +3,11 @@ import React, { useState } from 'react';
 function List({ listActive }) {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
-  function changeSearchActive() {
-    setIsSearchActive(!isSearchActive);
-  }
-
   return (
     <div className={!listActive ? "list" : "list list-show"}>
         <div className='list__main-btns'>
-          <button className={isSearchActive ? "list__main-btn" : "list__main-btn list__main-btn--active"} onClick={changeSearchActive}>Miasta</button>
-          <button className={!isSearchActive ? "list__main-btn" : "list__main-btn list__main-btn--active"} onClick={changeSearchActive}>Szukaj</button>
+          <button className={isSearchActive ? "list__main-btn" : "list__main-btn list__main-btn--active"} onClick={() => setIsSearchActive(false)}>Miasta</button>
+          <button className={!isSearchActive ? "list__main-btn" : "list__main-btn list__main-btn--active"} onClick={() => setIsSearchActive(true)}>Szukaj</button>
         </div>
     </div>
   )
