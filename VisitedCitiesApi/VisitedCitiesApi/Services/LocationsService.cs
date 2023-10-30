@@ -3,19 +3,24 @@
     public class LocationsService : ILocationsService
     {
         private readonly ILocationRepository _locationRepository;
+        private readonly ILocationMapper _locationMapper;
 
-        public LocationsService(ILocationRepository locationRepository)
+        public LocationsService(ILocationRepository locationRepository, ILocationMapper locationMapper)
         {
             _locationRepository = locationRepository;
+            _locationMapper = locationMapper;
         }
 
         public async Task<ServiceResponse> GetLocations(GetLocationsParameters getLocationsParameters)
         {
-            Expression<Func<Location, bool>> filter = CreateFilterByCommune(getLocationsParameters);
-
             var locations = await _locationRepository.FindByConditions(CreateFilterByCommune(getLocationsParameters));
+            var mappedLocations = new List<LocationModel>();
+            foreach(var location in locations)
+            {
+                mappedLocations.Add(_locationMapper.MapToClientModel(location));
+            }
 
-            return ServiceResponse<List<Location>>.Success(locations.ToList(), $"Found results: {locations.Count()}");
+            return ServiceResponse<List<LocationModel>>.Success(mappedLocations, $"Found results: {mappedLocations.Count()}");
         }
 
         private Expression<Func<Location, bool>> CreateFilterByCommune(GetLocationsParameters getLocationsParameters)

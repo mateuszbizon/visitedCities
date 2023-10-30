@@ -25,3 +25,4 @@ global using VisitedCitiesApi.Models.Request;
 global using VisitedCitiesApi.Models.Services;
 global using VisitedCitiesApi.Repositories;
 global using VisitedCitiesApi.Services.Mappers;
+global using VisitedCitiesApi.Models.ClientModel;
