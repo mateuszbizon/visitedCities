@@ -1,0 +1,33 @@
+@use "../abstract/colors" as *;
+
+@mixin underline {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    height: 3px;
+    width: 100%;
+    background-color: $main-color;
+}
+
+@mixin main-button {
+    display: block;
+    width: 100%;
+    background-color: $main-color;
+    color: #fff;
+    padding: 8px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color .3s;
+
+    &:hover {
+        background-color: $main-color-hover;
+    }
+
+    &:disabled {
+        background-color: $main-color-disabled;
+        cursor: not-allowed;
+    }
+}

@@ -1,0 +1,39 @@
+@use "../abstract/colors" as *;
+@use "../abstract/mixins" as *;
+
+.search-cities {
+    height: 95%;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        height: 75%;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
+    &__city {
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+
+    &__input {
+        width: 100%;
+        padding: 8px 16px;
+        margin-bottom: 15px;
+        font-size: 15px;
+    }
+
+    &__search-btn {
+        margin-bottom: 15px;
+        @include main-button;
+    }
+
+    &__new-city-btn {
+        @include main-button;
+    }
+}
