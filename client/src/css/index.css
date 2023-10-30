@@ -19,6 +19,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-bottom: 15px;
 }
 .list__main-btn {
   background: none;
@@ -138,6 +139,76 @@
     display: none;
   }
 }
+.search-cities {
+  height: 95%;
+}
+.search-cities__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 75%;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.search-cities__city {
+  padding: 10px;
+  cursor: pointer;
+}
+.search-cities__city:hover {
+  background-color: #ddd;
+}
+.search-cities__input {
+  width: 100%;
+  padding: 8px 16px;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+.search-cities__search-btn {
+  margin-bottom: 15px;
+  display: block;
+  width: 100%;
+  background-color: #039dff;
+  color: #fff;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.search-cities__search-btn:hover {
+  background-color: hsl(203, 100%, 45%);
+}
+.search-cities__search-btn:disabled {
+  background-color: hsl(203, 100%, 20%);
+  cursor: not-allowed;
+}
+.search-cities__new-city-btn {
+  display: block;
+  width: 100%;
+  background-color: #039dff;
+  color: #fff;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.search-cities__new-city-btn:hover {
+  background-color: hsl(203, 100%, 45%);
+}
+.search-cities__new-city-btn:disabled {
+  background-color: hsl(203, 100%, 20%);
+  cursor: not-allowed;
+}
+
 .map {
   height: 100vh;
 }

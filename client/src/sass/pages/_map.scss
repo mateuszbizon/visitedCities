@@ -1,6 +1,7 @@
 @use "../abstract/variables" as *;
 @use "../components/list";
 @use "../components/header";
+@use "../components/search-cities";
 
 .map {
     height: 100vh;
