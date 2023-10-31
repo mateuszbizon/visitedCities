@@ -41,7 +41,19 @@ function SearchCities() {
                     className={index === selectedCityIndex ? 'search-cities__city search-cities__city--selected' : "search-cities__city"} 
                     key={index} 
                     onClick={() => toggleSelectedCity(city, index)}>
-                {city.name}
+                    <span className='search-cities__city-name'>{city.name}</span>
+                    <div>
+                        <span className='search-cities__city-title'>Gmina:</span>
+                        <span>{city.commune}</span>
+                    </div>
+                    <div>
+                        <span className='search-cities__city-title'>Powiat:</span>
+                        <span>{city.district}</span>
+                    </div>
+                    <div>
+                        <span className='search-cities__city-title'>Województwo:</span>
+                        <span>{city.province}</span>
+                    </div>
                 </div>
             ))}
         </div>

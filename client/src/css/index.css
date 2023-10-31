@@ -155,6 +155,14 @@
   margin-bottom: 10px;
 }
 .search-cities__city {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 7px;
   padding: 10px;
   cursor: pointer;
 }
@@ -163,6 +171,12 @@
 }
 .search-cities__city--selected {
   border: 2px solid #039dff;
+}
+.search-cities__city-name {
+  font-size: 18px;
+}
+.search-cities__city-title {
+  margin-right: 5px;
 }
 .search-cities__input {
   width: 100%;

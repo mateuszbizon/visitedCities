@@ -13,6 +13,9 @@
     }
 
     &__city {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
         padding: 10px;
         cursor: pointer;
 
@@ -23,6 +26,14 @@
 
     &__city--selected {
         border: 2px solid $main-color;
+    }
+
+    &__city-name {
+        font-size: 18px;
+    }
+
+    &__city-title {
+        margin-right: 5px;
     }
 
     &__input {
