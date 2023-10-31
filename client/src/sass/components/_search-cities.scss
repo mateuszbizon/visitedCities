@@ -21,6 +21,10 @@
         }
     }
 
+    &__city--selected {
+        border: 2px solid $main-color;
+    }
+
     &__input {
         width: 100%;
         padding: 8px 16px;

@@ -2,7 +2,7 @@
   position: absolute;
   left: -100%;
   top: 0;
-  width: 280px;
+  width: 320px;
   background-color: #fff;
   height: 100%;
   z-index: 10;
@@ -160,6 +160,9 @@
 }
 .search-cities__city:hover {
   background-color: #ddd;
+}
+.search-cities__city--selected {
+  border: 2px solid #039dff;
 }
 .search-cities__input {
   width: 100%;
