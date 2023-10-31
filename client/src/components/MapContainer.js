@@ -5,7 +5,7 @@ function MapContainer() {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API
     })
-    const coords = { lat: 0, lng: 0 }
+    const coords = { lat: 51, lng: 20 }
 
     if (!isLoaded) return <div>Loading Map...</div>
 
@@ -13,7 +13,7 @@ function MapContainer() {
         <div className='map-container'>
             <GoogleMap
                 center={coords}
-                zoom={3}
+                zoom={6}
                 mapContainerStyle={{ width: '100%', height: '100%' }}
             >
             </GoogleMap>
