@@ -10,5 +10,6 @@
         public string Province { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public virtual List<AppUser> Visitors { get; set; } = new();
     }
 }
