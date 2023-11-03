@@ -2,6 +2,8 @@ import axios from "axios";
 
 const apiUrl = "https://visitedcitiesapi.azurewebsites.net";
 
+const API = axios.create({ baseURL: apiUrl });
+
 export async function getLocationsBySearch(value) {
 	const requestData = {
 		name: value,
@@ -11,7 +13,7 @@ export async function getLocationsBySearch(value) {
 	};
 
 	try {
-        const { data } = await axios.post(apiUrl + "/api/Locations/GetLocations", requestData);
+        const { data } = await API.post("/api/Locations/GetLocations", requestData)
 
         return data;
     } catch (error) {
