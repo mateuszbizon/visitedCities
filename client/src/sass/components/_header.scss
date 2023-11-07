@@ -57,7 +57,7 @@
 
 @media (min-width: 768px) {
     .map-header {
-        padding: 0 100px;
+        padding: 0 80px;
 
         &__logout-btn {
             display: none;
@@ -65,14 +65,6 @@
 
         &__link {
             display: block;
-        }
-    }
-}
-
-@media (min-width: 992px) {
-    .map-header {
-        &__burger-btn {
-            display: none;
         }
     }
 }

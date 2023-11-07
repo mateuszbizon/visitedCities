@@ -10,7 +10,7 @@ function Map() {
     <div className='map'>
         <Header listActive={listActive} setListActive={setListActive} />
         <div className='map-main-box'>
-            <List listActive={listActive} />
+            <List listActive={listActive} setListActive={setListActive} />
             <MapContainer />
         </div>
     </div>

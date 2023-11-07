@@ -46,12 +46,6 @@
   left: 0;
 }
 
-@media (min-width: 992px) {
-  .list {
-    position: sticky;
-    left: 0;
-  }
-}
 .map-header {
   height: 70px;
   background-color: #fff;
@@ -119,18 +113,13 @@
 
 @media (min-width: 768px) {
   .map-header {
-    padding: 0 100px;
+    padding: 0 80px;
   }
   .map-header__logout-btn {
     display: none;
   }
   .map-header__link {
     display: block;
-  }
-}
-@media (min-width: 992px) {
-  .map-header__burger-btn {
-    display: none;
   }
 }
 .search-cities {

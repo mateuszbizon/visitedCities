@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchCities from './SearchCities';
 
-function List({ listActive }) {
+function List({ listActive, setListActive }) {
   const [isSearchActive, setIsSearchActive] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth >= 992) {
+      setListActive(true);
+    }
+  }, [])
 
   return (
     <div className={!listActive ? "list" : "list list-show"}>

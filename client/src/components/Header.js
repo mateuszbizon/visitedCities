@@ -11,7 +11,7 @@ function Header({ listActive, setListActive }) {
   return (
     <div className='map-header'>
         <div className='map-header__logo-side'>
-            <button className='map-header__btn map-header__burger-btn' onClick={handleListActive}>
+            <button className='map-header__btn' onClick={handleListActive}>
                 <i className="fa-solid fa-bars"></i>
             </button>
             <h2 className='map-header__logo'>visitedCities</h2>
