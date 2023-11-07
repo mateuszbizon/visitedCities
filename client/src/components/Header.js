@@ -11,12 +11,16 @@ function Header({ listActive, setListActive }) {
   return (
     <div className='map-header'>
         <div className='map-header__logo-side'>
-            <i className="fa-solid fa-bars map-header__icon map-header__burger-icon" onClick={handleListActive}></i>
+            <button className='map-header__btn map-header__burger-btn' onClick={handleListActive}>
+                <i className="fa-solid fa-bars"></i>
+            </button>
             <h2 className='map-header__logo'>visitedCities</h2>
         </div>
         <div className="map-header__right-side">
             <a href='/' className='map-header__link'>Wyloguj się</a>
-            <i className="fa-solid fa-right-from-bracket map-header__icon map-header__logout-icon" aria-label='wyloguj się' onClick={() => navigate("/")}></i>
+            <button className='map-header__btn map-header__logout-btn' onClick={() => navigate("/")}>
+                <i className="fa-solid fa-right-from-bracket" aria-label='wyloguj się'></i>
+            </button>
         </div>
     </div>
   )

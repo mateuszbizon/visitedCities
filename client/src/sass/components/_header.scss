@@ -28,25 +28,17 @@
         justify-content: flex-end;
     }
 
-    &__icon {
-        position: relative;
+    &__btn {
+        border: none;
+        background: none;
+        padding: 5px 7px;
+        border-radius: 50%;
         font-size: 22px;
         cursor: pointer;
+        transition: background-color .2s;
 
-        &::after {
-            content: "";
-            position: absolute;
-            top: -6px;
-            left: -7px;
+        &:hover {
             background-color: rgb(128, 128, 128, 0.2);
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            opacity: 0;
-        }
-
-        &:hover::after {
-            opacity: 1;
         }
     }
 
@@ -67,7 +59,7 @@
     .map-header {
         padding: 0 100px;
 
-        &__logout-icon {
+        &__logout-btn {
             display: none;
         }
 
@@ -79,7 +71,7 @@
 
 @media (min-width: 992px) {
     .map-header {
-        &__burger-icon {
+        &__burger-btn {
             display: none;
         }
     }
