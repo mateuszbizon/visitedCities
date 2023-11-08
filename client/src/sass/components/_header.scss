@@ -42,12 +42,13 @@
         }
     }
 
-    &__link {
+    &__btn-link {
         position: relative;
         display: none;
-        color: #000;
-        text-decoration: none;
+        border: none;
+        background: none;
         font-size: 20px;
+        cursor: pointer;
 
         &:hover::after {
             @include underline;
@@ -63,7 +64,7 @@
             display: none;
         }
 
-        &__link {
+        &__btn-link {
             display: block;
         }
     }

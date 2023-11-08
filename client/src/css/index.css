@@ -94,14 +94,15 @@
 .map-header__btn:hover {
   background-color: rgba(128, 128, 128, 0.2);
 }
-.map-header__link {
+.map-header__btn-link {
   position: relative;
   display: none;
-  color: #000;
-  text-decoration: none;
+  border: none;
+  background: none;
   font-size: 20px;
+  cursor: pointer;
 }
-.map-header__link:hover::after {
+.map-header__btn-link:hover::after {
   content: "";
   position: absolute;
   left: 0;
@@ -118,7 +119,7 @@
   .map-header__logout-btn {
     display: none;
   }
-  .map-header__link {
+  .map-header__btn-link {
     display: block;
   }
 }
