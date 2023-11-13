@@ -1,0 +1,1 @@
+export const newPlaceAddedSuccessMessage = "Dodano nowe miejsce pomyślnie";

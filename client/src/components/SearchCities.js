@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { getLocationsBySearch } from '../api';
+import { useNotification } from '../context/NotifiactionContext';
+import * as messages from "../constants/messages";
 
 function SearchCities() {
     const [searchValue, setSearchValue] = useState("");
     const [searchedCities, setSearchedCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedCity, setSelectedCity] = useState(null);
-    const [selectedCityIndex, setSelectedCityIndex] = useState(null);
+    const [selectedCity, setSelectedCity] = useState({ id: null, index: null });
+    const { showNotification } = useNotification();
 
     function handleGetLocationsBySearch() {
         if (searchValue === "") return;
@@ -19,25 +21,23 @@ function SearchCities() {
             })
     }
 
-    function toggleSelectedCity(city, index) {
-        if (selectedCityIndex === index) {
-            setSelectedCity(null);
-            setSelectedCityIndex(null);
+    function toggleSelectedCity(city, cityIndex) {
+        if (selectedCity.index === cityIndex) {
+            setSelectedCity({ ...selectedCity, id: null, index: null });
 
             return;
         }
 
-        setSelectedCity(city.id);
-        setSelectedCityIndex(index);
+        setSelectedCity({ ...selectedCity, id: city.id, index: cityIndex });
     }
 
     function handleAddNewLocation() {
-        setSelectedCity(null);
-        setSelectedCityIndex(null);
+        setSelectedCity({ ...selectedCity, id: null, index: null });
 
-        const updatedSearchedCities = searchedCities.filter(city => city.id !== selectedCity);
+        const updatedSearchedCities = searchedCities.filter(city => city.id !== selectedCity.id);
 
-        setSearchedCities([...updatedSearchedCities])
+        setSearchedCities([...updatedSearchedCities]);
+        showNotification(messages.newPlaceAddedSuccessMessage);
     }
 
   return (
@@ -47,7 +47,7 @@ function SearchCities() {
         <div className='search-cities__content'>
             {searchedCities.map((city, index) => (
                 <div 
-                    className={index === selectedCityIndex ? 'search-cities__city search-cities__city--selected' : "search-cities__city"} 
+                    className={index === selectedCity.index ? 'search-cities__city search-cities__city--selected' : "search-cities__city"} 
                     key={index} 
                     onClick={() => toggleSelectedCity(city, index)}>
                     <span className='search-cities__city-name'>{city.name}</span>
@@ -66,7 +66,7 @@ function SearchCities() {
                 </div>
             ))}
         </div>
-        <button className='search-cities__new-city-btn' disabled={!selectedCity} onClick={handleAddNewLocation}>Dodaj miasto</button>
+        <button className='search-cities__new-city-btn' disabled={!selectedCity.id} onClick={handleAddNewLocation}>Dodaj miasto</button>
     </div>
   )
 }

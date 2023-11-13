@@ -1,0 +1,39 @@
+@use "../abstract/variables" as *;
+@use "../abstract/colors" as *;
+
+.notification {
+    position: fixed;
+    top: calc($map-header-height + 10px);
+    right: -100%;
+    z-index: 100;
+    background-color: $notification-success;
+    width: 200px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    transition: right .7s ease-in-out;
+
+    &__time-status {
+        margin-top: 15px;
+        height: 5px;
+        width: 0;
+        background-color: #fff;
+        border-radius: 8px;
+        animation: time-status 3s .7s forwards;
+    }
+}
+
+.show-notification {
+    right: 50px;
+}
+
+@keyframes time-status {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
