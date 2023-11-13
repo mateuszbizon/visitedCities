@@ -27,8 +27,17 @@ function SearchCities() {
             return;
         }
 
-        setSelectedCity(city);
+        setSelectedCity(city.id);
         setSelectedCityIndex(index);
+    }
+
+    function handleAddNewLocation() {
+        setSelectedCity(null);
+        setSelectedCityIndex(null);
+
+        const updatedSearchedCities = searchedCities.filter(city => city.id !== selectedCity);
+
+        setSearchedCities([...updatedSearchedCities])
     }
 
   return (
@@ -57,7 +66,7 @@ function SearchCities() {
                 </div>
             ))}
         </div>
-        <button className='search-cities__new-city-btn' disabled={!selectedCity}>Dodaj miasto</button>
+        <button className='search-cities__new-city-btn' disabled={!selectedCity} onClick={handleAddNewLocation}>Dodaj miasto</button>
     </div>
   )
 }
