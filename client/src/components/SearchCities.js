@@ -8,7 +8,7 @@ function SearchCities() {
     const [searchedCities, setSearchedCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedCity, setSelectedCity] = useState({ id: null, index: null });
-    const { showNotification } = useNotification();
+    const { showNotification, showErrorNotification } = useNotification();
 
     function handleGetLocationsBySearch() {
         if (searchValue === "") return;
@@ -18,6 +18,9 @@ function SearchCities() {
             .then(data => {
                 setSearchedCities([...data.content]);
                 setIsLoading(false);
+            })
+            .catch(() => {
+                showErrorNotification(messages.searchCitiesFail);
             })
     }
 

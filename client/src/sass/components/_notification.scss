@@ -24,6 +24,10 @@
     }
 }
 
+.notification-error {
+    background-color: $notification-fail;
+}
+
 .show-notification {
     right: 50px;
 }

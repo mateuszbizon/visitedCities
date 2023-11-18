@@ -251,6 +251,10 @@
           animation: time-status 3s 0.7s forwards;
 }
 
+.notification-error {
+  background-color: #ff0000;
+}
+
 .show-notification {
   right: 50px;
 }

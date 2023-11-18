@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNotification } from '../context/NotifiactionContext';
 
 function Notification() {
-    const { notification, hideNotification } = useNotification();
+    const { notification, hideNotification, error } = useNotification();
 
     useEffect(() => {
         let timer;
@@ -19,7 +19,7 @@ function Notification() {
     }, [notification, hideNotification])
 
   return (
-    <div className={notification ? "notification show-notification" : "notification"}>
+    <div className={notification ? error ? "notification notification-error show-notification" : "notification show-notification" : "notification"}>
         {notification && notification}
         <div className={notification && 'notification__time-status'}></div>
     </div>
