@@ -11,7 +11,7 @@ function Login() {
       const token = credentialResponse?.credentials?.accessToken; 
 
       
-      const response = await fetch('YOUR_SERVER_ENDPOINT', {
+      const response = await fetch('https://visitedcitiesapi.azurewebsites.net/api/Account/GoogleExternalLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
