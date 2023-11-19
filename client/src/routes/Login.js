@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function Login(){
-    return(
-        <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
+  return(
+    <GoogleLogin
+      onSuccess={credentialResponse => {
+      console.log(credentialResponse);
   }}
-  onError={() => {
-    console.log('Login Failed');
+      onError={() => {
+      console.log('Login Failed');
   }}
     />
     );
