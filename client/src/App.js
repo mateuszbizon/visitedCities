@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Map from "./routes/Map";
-import Map from "./routes/Login";
+import Login from "./routes/Login";
 import "./css/index.css";
 
 function App() {
