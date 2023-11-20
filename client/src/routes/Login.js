@@ -17,15 +17,10 @@ function Login() {
         body: JSON.stringify({ token: token}),
       });
 
-      const data = await response.json();
-
-      if (data.successStatus) {
-        localStorage.setItem('accessToken', token);
+    localStorage.setItem('accessToken', token);
  
-        navigate('/map');
-      } else {
-        console.log('Token validation failed on the server');
-      }
+     navigate('/map');
+     
     } catch (error) {
       console.error('Error:', error);
     }
