@@ -9,19 +9,19 @@ function Login() {
     try {
       console.log('Token received:', credentialResponse);
 
-      const token = credentialResponse?.credentials?.accessToken;
+      const token = credentialResponse?.credential;
 
       const response = await fetch('https://visitedcitiesapi.azurewebsites.net/api/Account/GoogleExternalLogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({ token: token}),
       });
 
       const data = await response.json();
 
-      if (data.success) {
+      if (data.successStatus) {
         localStorage.setItem('accessToken', token);
         console.log('Token saved to local storage');
 
