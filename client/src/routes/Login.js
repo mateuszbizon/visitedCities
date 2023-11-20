@@ -7,8 +7,6 @@ function Login() {
 
   const handleLoginSuccess = async (credentialResponse) => {
     try {
-      console.log('Token received:', credentialResponse);
-
       const token = credentialResponse?.credential;
 
       const response = await fetch('https://visitedcitiesapi.azurewebsites.net/api/Account/GoogleExternalLogin', {
@@ -23,9 +21,7 @@ function Login() {
 
       if (data.successStatus) {
         localStorage.setItem('accessToken', token);
-        console.log('Token saved to local storage');
-
-        // Redirect to the Map page after successful login
+ 
         navigate('/map');
       } else {
         console.log('Token validation failed on the server');
