@@ -16,8 +16,10 @@ function Login() {
         },
         body: JSON.stringify({ token: token}),
       });
+    
+    const data = await response.json();
 
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem('user', JSON.stringify({ ...data.content}));
  
      navigate('/map');
      
