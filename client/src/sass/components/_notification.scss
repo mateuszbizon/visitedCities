@@ -1,18 +1,18 @@
-@use "../abstract/variables" as *;
 @use "../abstract/colors" as *;
+@use "../abstract/mixins" as *;
+@use "../abstract/variables" as *;
 
-.notification {
+.notification, .notification-error {
     position: fixed;
     top: calc($map-header-height + 10px);
-    right: -100%;
+    left: -100%;
     z-index: 100;
-    background-color: $notification-success;
     width: 200px;
     color: #fff;
     text-align: center;
     padding: 10px;
     font-size: 18px;
-    transition: right .7s ease-in-out;
+    transition: left .7s ease-in-out;
 
     &__time-status {
         margin-top: 15px;
@@ -24,12 +24,16 @@
     }
 }
 
+.notification {
+    background-color: $notification-success;
+}
+
 .notification-error {
     background-color: $notification-fail;
 }
 
 .show-notification {
-    right: 50px;
+    left: 5px;
 }
 
 @keyframes time-status {

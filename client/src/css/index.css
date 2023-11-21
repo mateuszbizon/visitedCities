@@ -227,21 +227,20 @@
   cursor: not-allowed;
 }
 
-.notification {
+.notification, .notification-error {
   position: fixed;
   top: 80px;
-  right: -100%;
+  left: -100%;
   z-index: 100;
-  background-color: #218c74;
   width: 200px;
   color: #fff;
   text-align: center;
   padding: 10px;
   font-size: 18px;
-  -webkit-transition: right 0.7s ease-in-out;
-  transition: right 0.7s ease-in-out;
+  -webkit-transition: left 0.7s ease-in-out;
+  transition: left 0.7s ease-in-out;
 }
-.notification__time-status {
+.notification__time-status, .notification-error__time-status {
   margin-top: 15px;
   height: 5px;
   width: 0;
@@ -251,12 +250,16 @@
           animation: time-status 3s 0.7s forwards;
 }
 
+.notification {
+  background-color: #218c74;
+}
+
 .notification-error {
   background-color: #ff0000;
 }
 
 .show-notification {
-  right: 50px;
+  left: 5px;
 }
 
 @-webkit-keyframes time-status {

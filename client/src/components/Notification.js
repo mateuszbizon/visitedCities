@@ -19,10 +19,17 @@ function Notification() {
     }, [notification, hideNotification])
 
   return (
-    <div className={notification ? error ? "notification notification-error show-notification" : "notification show-notification" : "notification"}>
-        {notification && notification}
-        <div className={notification && 'notification__time-status'}></div>
-    </div>
+    <>
+        <div className={notification && !error ? "notification show-notification" : "notification"}>
+            {notification && notification}
+            <div className={notification && 'notification__time-status'}></div>
+        </div>
+
+        <div className={notification && error ? "notification-error show-notification" : "notification-error"}>
+            {notification && notification}
+            <div className={notification && 'notification__time-status'}></div>
+        </div>
+    </>
   )
 }
 
