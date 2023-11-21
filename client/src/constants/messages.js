@@ -4,3 +4,5 @@ export const newPlaceAddedFailMessage = "Nie można dodać nowego miejsca. Spró
 
 export const searchCitiesEmpty = "Znaleziono 0 wyników";
 export const searchCitiesFailMessage = "Nie można wyszukać miejsc. Spróbuj ponownie później";
+
+export const logoutSuccessMessage = "Wylogowano pomyślnie";
