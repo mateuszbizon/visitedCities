@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getLocationsBySearch } from '../api';
+import { getLocationsBySearch, addNewLocationById } from '../api';
 import { useNotification } from '../context/NotifiactionContext';
 import * as messages from "../constants/messages";
 
@@ -17,16 +17,26 @@ function SearchCities() {
         getLocationsBySearch(searchValue)
             .then(data => {
                 setSearchedCities([...data.content]);
+
+                if (!data.content.length) {
+                    showNotification(messages.searchCitiesEmpty);
+                }
+
                 setIsLoading(false);
             })
             .catch(() => {
-                showErrorNotification(messages.searchCitiesFail);
+                setIsLoading(false);
+                showErrorNotification(messages.searchCitiesFailMessage);
             })
+    }
+
+    function clearSelectedCity() {
+        setSelectedCity({ ...selectedCity, id: null, index: null });
     }
 
     function toggleSelectedCity(city, cityIndex) {
         if (selectedCity.index === cityIndex) {
-            setSelectedCity({ ...selectedCity, id: null, index: null });
+            clearSelectedCity();
 
             return;
         }
@@ -35,12 +45,28 @@ function SearchCities() {
     }
 
     function handleAddNewLocation() {
-        setSelectedCity({ ...selectedCity, id: null, index: null });
+        setIsLoading(true);     
+        addNewLocationById(selectedCity.id)
+            .then(() => {
+                setIsLoading(false);
+                clearSelectedCity();
 
-        const updatedSearchedCities = searchedCities.filter(city => city.id !== selectedCity.id);
+                const updatedSearchedCities = searchedCities.filter(city => city.id !== selectedCity.id);
 
-        setSearchedCities([...updatedSearchedCities]);
-        showNotification(messages.newPlaceAddedSuccessMessage);
+                setSearchedCities([...updatedSearchedCities]);
+                showNotification(messages.newPlaceAddedSuccessMessage);
+            })
+            .catch(error => {
+                setIsLoading(false);
+
+                if (error.response.data.statusCode === 422) {
+                    showErrorNotification(messages.newPlaceAlreadyAddedMessage);
+
+                    return;
+                }
+
+                showErrorNotification(messages.newPlaceAddedFailMessage)
+            })
     }
 
   return (
@@ -69,7 +95,7 @@ function SearchCities() {
                 </div>
             ))}
         </div>
-        <button className='search-cities__new-city-btn' disabled={!selectedCity.id} onClick={handleAddNewLocation}>Dodaj miasto</button>
+        <button className='search-cities__new-city-btn' disabled={!selectedCity.id || isLoading} onClick={handleAddNewLocation}>Dodaj miasto</button>
     </div>
   )
 }

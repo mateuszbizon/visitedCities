@@ -4,6 +4,14 @@ const apiUrl = "https://visitedcitiesapi.azurewebsites.net";
 
 const API = axios.create({ baseURL: apiUrl });
 
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem('user')) {
+      req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
+    }
+  
+    return req;
+});
+
 export async function getLocationsBySearch(value) {
 	const requestData = {
 		name: value,
@@ -11,12 +19,12 @@ export async function getLocationsBySearch(value) {
 			exactMatch: false,
 		},
 	};
+	
+	const { data } = await API.post("/api/Locations/GetLocations", requestData)
 
-	try {
-        const { data } = await API.post("/api/Locations/GetLocations", requestData)
+	return data;
+}
 
-        return data;
-    } catch (error) {
-        console.log(error)
-    }
+export async function addNewLocationById(locationId) {
+	await API.post(`/api/Visit/Visit/${locationId}`);
 }
