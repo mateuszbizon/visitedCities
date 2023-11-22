@@ -39,19 +39,16 @@
     }
 
     &__input {
-        width: 100%;
-        padding: 8px 16px;
-        margin-bottom: 15px;
-        font-size: 15px;
+        @include input;
     }
 
     &__search-btn {
         margin-bottom: 15px;
-        @include main-button;
+        @include main-button($main-color, $main-color-hover, $main-color-disabled);
     }
 
     &__new-city-btn {
-        @include main-button;
+        @include main-button($main-color, $main-color-hover, $main-color-disabled);
         align-self: flex-end;
     }
 }

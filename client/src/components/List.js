@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SearchCities from './SearchCities';
+import VisitedCities from './VisitedCities';
 
-function List({ listActive, setListActive }) {
+function List({ listActive, setListActive, allUserLocations }) {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   useEffect(() => {
@@ -18,9 +19,7 @@ function List({ listActive, setListActive }) {
         </div>
 
         {isSearchActive ? <SearchCities /> : (
-          <div>
-            miasta
-          </div>
+          <VisitedCities allUserLocations={allUserLocations} />
         )}
     </div>
   )

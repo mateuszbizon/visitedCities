@@ -290,6 +290,104 @@
     width: 100%;
   }
 }
+.visited-cities {
+  height: 95%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.visited-cities__input {
+  width: 100%;
+  padding: 8px 16px;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+.visited-cities__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  gap: 20px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+.visited-cities__text-side {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+}
+.visited-cities__place {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 7px;
+  cursor: pointer;
+}
+.visited-cities__place:hover {
+  background-color: #eee;
+}
+.visited-cities__place--selected {
+  border: 2px solid #EE4B2B;
+}
+.visited-cities__place-name {
+  font-size: 22px;
+}
+.visited-cities__place-type {
+  font-size: 19px;
+}
+.visited-cities__place-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.visited-cities__place-text {
+  font-size: 17px;
+  color: #262626;
+}
+.visited-cities__delete-place-btn {
+  display: block;
+  width: 100%;
+  background-color: #EE4B2B;
+  color: #fff;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.visited-cities__delete-place-btn:hover {
+  background-color: hsl(0, 100%, 40%);
+}
+.visited-cities__delete-place-btn:disabled {
+  background-color: hsl(0, 100%, 30%);
+  cursor: not-allowed;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
