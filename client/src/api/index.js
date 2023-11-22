@@ -28,3 +28,9 @@ export async function getLocationsBySearch(value) {
 export async function addNewLocationById(locationId) {
 	await API.post(`/api/Visit/Visit/${locationId}`);
 }
+
+export async function getAllUserLocations() {
+	const { data } = await API.get("/api/Visit/GetVisitedLocations");
+
+	return data;
+}

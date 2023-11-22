@@ -1,7 +1,7 @@
 import React from 'react';
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api"
 
-function MapContainer() {
+function MapContainer({ allUserLocations }) {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API
     })
@@ -16,6 +16,9 @@ function MapContainer() {
                 zoom={6}
                 mapContainerStyle={{ width: '100%', height: '100%' }}
             >
+                {allUserLocations.map((place, index) => (
+                    <Marker key={index} position={{ lat: place.latitude, lng: place.longitude }} onClick={() => console.log(place)} />
+                ))}
             </GoogleMap>
         </div>
       );
