@@ -3,11 +3,11 @@ import { getLocationsBySearch, addNewLocationById } from '../api';
 import { useNotification } from '../context/NotifiactionContext';
 import * as messages from "../constants/messages";
 
-function SearchCities() {
+function SearchCities({ allUserLocations, setAllUserLocations }) {
     const [searchValue, setSearchValue] = useState("");
     const [searchedCities, setSearchedCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedCity, setSelectedCity] = useState({ id: null, index: null });
+    const [selectedCity, setSelectedCity] = useState({ id: null, index: null, city: null });
     const { showNotification, showErrorNotification } = useNotification();
 
     function handleGetLocationsBySearch() {
@@ -31,17 +31,17 @@ function SearchCities() {
     }
 
     function clearSelectedCity() {
-        setSelectedCity({ ...selectedCity, id: null, index: null });
+        setSelectedCity({ ...selectedCity, id: null, index: null, city: null });
     }
 
-    function toggleSelectedCity(city, cityIndex) {
+    function toggleSelectedCity(cityId, cityIndex, city) {
         if (selectedCity.index === cityIndex) {
             clearSelectedCity();
 
             return;
         }
 
-        setSelectedCity({ ...selectedCity, id: city.id, index: cityIndex });
+        setSelectedCity({ ...selectedCity, id: cityId, index: cityIndex, city: city });
     }
 
     function handleAddNewLocation() {
@@ -49,11 +49,13 @@ function SearchCities() {
         addNewLocationById(selectedCity.id)
             .then(() => {
                 setIsLoading(false);
-                clearSelectedCity();
 
                 const updatedSearchedCities = searchedCities.filter(city => city.id !== selectedCity.id);
 
                 setSearchedCities([...updatedSearchedCities]);
+                setAllUserLocations([...allUserLocations, selectedCity.city]);
+                clearSelectedCity();
+
                 showNotification(messages.newPlaceAddedSuccessMessage);
             })
             .catch(error => {
@@ -78,7 +80,7 @@ function SearchCities() {
                 <div 
                     className={index === selectedCity.index ? 'search-cities__city search-cities__city--selected' : "search-cities__city"} 
                     key={index} 
-                    onClick={() => toggleSelectedCity(city, index)}>
+                    onClick={() => toggleSelectedCity(city.id, index, city)}>
                     <span className='search-cities__city-name'>{city.name}</span>
                     <div>
                         <span className='search-cities__city-title'>Gmina:</span>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchCities from './SearchCities';
 import VisitedCities from './VisitedCities';
 
-function List({ listActive, setListActive, allUserLocations }) {
+function List({ listActive, setListActive, allUserLocations, setAllUserLocations, userLocationsFiltered, setUserLocationsFiltered }) {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   useEffect(() => {
@@ -18,8 +18,12 @@ function List({ listActive, setListActive, allUserLocations }) {
           <button className={!isSearchActive ? "list__main-btn" : "list__main-btn list__main-btn--active"} onClick={() => setIsSearchActive(true)}>Szukaj</button>
         </div>
 
-        {isSearchActive ? <SearchCities /> : (
-          <VisitedCities allUserLocations={allUserLocations} />
+        {isSearchActive ? <SearchCities allUserLocations={allUserLocations} setAllUserLocations={setAllUserLocations} /> : (
+          <VisitedCities 
+          allUserLocations={allUserLocations} 
+          userLocationsFiltered={userLocationsFiltered} 
+          setUserLocationsFiltered={setUserLocationsFiltered} 
+          />
         )}
     </div>
   )

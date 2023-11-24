@@ -9,12 +9,14 @@ import * as messages from "../constants/messages";
 function Map() {
     const [listActive, setListActive] = useState(false);
     const [allUserLocations, setAllUserLocations] = useState([]);
+    const [userLocationsFiltered, setUserLocationsFiltered] = useState([]);
     const { showErrorNotification } = useNotification();
 
     function handleGetAllUserLocations() {
       getAllUserLocations()
         .then(data => {
           setAllUserLocations([...data.content]);
+          setUserLocationsFiltered([...data.content])
           console.log(data.content)
         })
         .catch(() => {
@@ -30,8 +32,15 @@ function Map() {
     <div className='map'>
         <Header listActive={listActive} setListActive={setListActive} />
         <div className='map-main-box'>
-            <List listActive={listActive} setListActive={setListActive} allUserLocations={allUserLocations} />
-            <MapContainer allUserLocations={allUserLocations} />
+            <List
+             listActive={listActive} 
+             setListActive={setListActive} 
+             allUserLocations={allUserLocations} 
+             setAllUserLocations={setAllUserLocations} 
+             userLocationsFiltered={userLocationsFiltered}
+             setUserLocationsFiltered={setUserLocationsFiltered}
+             />
+            <MapContainer userLocationsFiltered={userLocationsFiltered} />
         </div>
     </div>
   )
