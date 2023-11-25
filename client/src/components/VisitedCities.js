@@ -83,7 +83,10 @@ function VisitedCities({ allUserLocations, setAllUserLocations, userLocationsFil
         <div className="visited-cities__content">
             {userLocationsFiltered.map((place, index) => (
                 <div key={index} className={index === selectedCity.index ? "visited-cities__place visited-cities__place--selected" : "visited-cities__place"} onClick={() => toggleSelectedCity(place, index)}>
-                    <img src={place.type === "village" ? villageImg : cityImg} />
+                    <img 
+                        src={place.type === "village" ? villageImg : cityImg} 
+                        alt={place.type === "village" ? "Zdjęcie ukazujące wieś" : "Zdjęcie ukazujące misato"} 
+                    />
                     <div className="visited-cities__text-side">
                         <p className="visited-cities__place-name">{place.name}</p>
                         <p className="visited-cities__place-type">{place.type === "village" ? "Wieś" : "Miasto"}</p>
