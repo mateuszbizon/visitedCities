@@ -17,46 +17,66 @@
 
         public async Task<ServiceResponse> GoogleExternalLogin(TokenRequest tokenRequest)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var encodedToken = tokenHandler.ReadToken(tokenRequest.Token);
-            var decodedToken = encodedToken as JwtSecurityToken;
-
-            var userEmail = decodedToken.Claims.FirstOrDefault(c => c.Type == "email").Value;
-            var user = await _userManager.FindByEmailAsync(userEmail);
-            if (user == null)
+            try
             {
-                AppUser newUser = new AppUser { Email = userEmail, UserName = userEmail };
-                newUser.EmailConfirmed = true;
-                var result = await _userManager.CreateAsync(newUser, "@Aa1234" + Guid.NewGuid().ToString().ToUpper());
-                user = await _userManager.FindByEmailAsync(userEmail);
-                await _userManager.AddToRoleAsync(newUser, "User");
-            }
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var encodedToken = tokenHandler.ReadToken(tokenRequest.Token);
+                var decodedToken = encodedToken as JwtSecurityToken;
 
-            var securityStamp = _userManager.GetSecurityStampAsync(user);
-            var claims = new List<Claim>()
+                var userEmail = decodedToken.Claims.FirstOrDefault(c => c.Type == "email").Value;
+                var user = await _userManager.FindByEmailAsync(userEmail);
+                if (user == null)
+                {
+                    AppUser newUser = new AppUser { Email = userEmail, UserName = userEmail };
+                    newUser.EmailConfirmed = true;
+                    var result = await _userManager.CreateAsync(newUser, "@Aa1234" + Guid.NewGuid().ToString().ToUpper());
+                    user = await _userManager.FindByEmailAsync(userEmail);
+                    await _userManager.AddToRoleAsync(newUser, "User");
+                }
+
+                var securityStamp = _userManager.GetSecurityStampAsync(user);
+                var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim("AspNet.Identity.SecurityStamp", user.SecurityStamp),
             };
-            claims.AddRange(await GetUserRoles(user));
+                claims.AddRange(await GetUserRoles(user));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Program.configuration["JwtKey"]));
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
-            var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer, _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Program.configuration["JwtKey"]));
+                var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
+                var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer, _authenticationSettings.JwtIssuer, claims, expires: expires, signingCredentials: cred);
 
-            var loginUserResponse = new UserLoginResponse
+                var loginUserResponse = new UserLoginResponse
+                {
+                    Token = tokenHandler.WriteToken(token),
+                    User = _mapper.MapToClientModel(user)
+                };
+
+                var userProfilePicture = decodedToken.Claims.FirstOrDefault(c => c.Type == "picture").Value;
+                loginUserResponse.User.ProfilePictureLink = userProfilePicture;
+
+                return ServiceResponse<UserLoginResponse>.Success(loginUserResponse, "Login with google successful.");
+            }
+            catch (SecurityTokenMalformedException)
             {
-                Token = tokenHandler.WriteToken(token),
-                User = _mapper.MapToClientModel(user)
-            };
+                return HandleInvalidToken();
+            }
+            catch (NullReferenceException)
+            {
+                return HandleInvalidToken();
+            }
+            catch (ArgumentException)
+            {
+                return HandleInvalidToken();
+            }
+        }
 
-            var userProfilePicture = decodedToken.Claims.FirstOrDefault(c => c.Type == "picture").Value;
-            loginUserResponse.User.ProfilePictureLink = userProfilePicture;
-
-            return ServiceResponse<UserLoginResponse>.Success(loginUserResponse, "Login with google successful.");
+        private ServiceResponse HandleInvalidToken()
+        {
+            return ServiceResponse.Error("Invalid token.", HttpStatusCode.Unauthorized);
         }
 
         public async Task<AppUser> GetCurrentUser()
