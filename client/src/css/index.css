@@ -349,6 +349,10 @@
   overflow-y: auto;
   margin-bottom: 10px;
 }
+.visited-cities__content-message {
+  text-align: center;
+  font-size: 18px;
+}
 .visited-cities__text-side {
   display: -webkit-box;
   display: -ms-flexbox;

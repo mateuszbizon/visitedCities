@@ -19,6 +19,11 @@
         margin-bottom: 10px;
     }
 
+    &__content-message {
+        text-align: center;
+        font-size: 18px;
+    }
+
     &__text-side {
         display: flex;
         flex-direction: column;

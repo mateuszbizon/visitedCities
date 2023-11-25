@@ -81,30 +81,36 @@ function VisitedCities({ allUserLocations, setAllUserLocations, userLocationsFil
             ))}
         </select>
         <div className="visited-cities__content">
-            {userLocationsFiltered.map((place, index) => (
-                <div key={index} className={index === selectedCity.index ? "visited-cities__place visited-cities__place--selected" : "visited-cities__place"} onClick={() => toggleSelectedCity(place, index)}>
-                    <img 
-                        src={place.type === "village" ? villageImg : cityImg} 
-                        alt={place.type === "village" ? "Zdjęcie ukazujące wieś" : "Zdjęcie ukazujące misato"} 
-                    />
-                    <div className="visited-cities__text-side">
-                        <p className="visited-cities__place-name">{place.name}</p>
-                        <p className="visited-cities__place-type">{place.type === "village" ? "Wieś" : "Miasto"}</p>
-                        <div className="visited-cities__place-row">
-                            <span className="visited-cities__place-text">Gmina</span>
-                            <span className="visited-cities__place-text">{place.commune}</span>
+            {!userLocationsFiltered.length ? (
+                <p className='visited-cities__content-message'>Nie znaleziono odwiedzonych miejsc</p>
+            ) : (
+                <>
+                    {userLocationsFiltered.map((place, index) => (
+                        <div key={index} className={index === selectedCity.index ? "visited-cities__place visited-cities__place--selected" : "visited-cities__place"} onClick={() => toggleSelectedCity(place, index)}>
+                            <img 
+                                src={place.type === "village" ? villageImg : cityImg} 
+                                alt={place.type === "village" ? "Zdjęcie ukazujące wieś" : "Zdjęcie ukazujące misato"} 
+                            />
+                            <div className="visited-cities__text-side">
+                                <p className="visited-cities__place-name">{place.name}</p>
+                                <p className="visited-cities__place-type">{place.type === "village" ? "Wieś" : "Miasto"}</p>
+                                <div className="visited-cities__place-row">
+                                    <span className="visited-cities__place-text">Gmina</span>
+                                    <span className="visited-cities__place-text">{place.commune}</span>
+                                </div>
+                                <div className="visited-cities__place-row">
+                                    <span className="visited-cities__place-text">Powiat</span>
+                                    <span className="visited-cities__place-text">{place.district}</span>
+                                </div>
+                                <div className="visited-cities__place-row">
+                                    <span className="visited-cities__place-text">Województwo</span>
+                                    <span className="visited-cities__place-text">{place.province}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div className="visited-cities__place-row">
-                            <span className="visited-cities__place-text">Powiat</span>
-                            <span className="visited-cities__place-text">{place.district}</span>
-                        </div>
-                        <div className="visited-cities__place-row">
-                            <span className="visited-cities__place-text">Województwo</span>
-                            <span className="visited-cities__place-text">{place.province}</span>
-                        </div>
-                    </div>
-                </div>
-            ))}
+                    ))}
+                </>
+            )}
         </div>
         <button className="visited-cities__delete-place-btn" disabled={!selectedCity.id || isLoading} onClick={handleDeleteLocation}>Usuń miejsce</button>
     </div>
