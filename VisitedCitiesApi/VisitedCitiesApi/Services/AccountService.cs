@@ -5,12 +5,14 @@
         private readonly UserManager<AppUser> _userManager;
         private readonly IUserMapper _mapper;
         private readonly AuthenticationSettings _authenticationSettings;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountService(AuthenticationSettings authenticationSettings, IUserMapper mapper, UserManager<AppUser> userManager)
+        public AccountService(AuthenticationSettings authenticationSettings, IUserMapper mapper, UserManager<AppUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _authenticationSettings = authenticationSettings;
             _mapper = mapper;
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ServiceResponse> GoogleExternalLogin(TokenRequest tokenRequest)
@@ -52,6 +54,16 @@
             };
 
             return ServiceResponse<UserLoginResponse>.Success(loginUserResponse, "Login with google successful.");
+        }
+
+        public async Task<AppUser> GetCurrentUser()
+        {
+            var authHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].FirstOrDefault();
+            var token = authHeader.Substring("Bearer ".Length);
+            var handler = new JwtSecurityTokenHandler();
+            var claims = handler.ReadJwtToken(token).Claims;
+            var userIdClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            return await _userManager.FindByIdAsync(userIdClaim.Value);
         }
 
         private async Task<List<Claim>> GetUserRoles(AppUser? user)

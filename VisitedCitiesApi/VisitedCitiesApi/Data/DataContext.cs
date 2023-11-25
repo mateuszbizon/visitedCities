@@ -29,6 +29,15 @@ namespace VisitedCitiesApi.Data
                 new AppRole { Id = 2, Name = "User", NormalizedName = "USER" }
                 );
 
+            modelBuilder.Entity<Location>()
+                .HasMany(h => h.Visitors)
+                .WithMany(t => t.VisitedLocations)
+                .UsingEntity<Dictionary<string, object>>(
+                "VisitedLocation",
+                x => x.HasOne<AppUser>().WithMany().OnDelete(DeleteBehavior.NoAction),
+                x => x.HasOne<Location>().WithMany().OnDelete(DeleteBehavior.NoAction)
+            );
+
             base.OnModelCreating(modelBuilder);
         }
     }
