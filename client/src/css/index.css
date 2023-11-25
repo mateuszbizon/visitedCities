@@ -140,6 +140,11 @@
   left: 0;
 }
 
+@media (min-width: 576px) {
+  .list {
+    width: 400px;
+  }
+}
 .search-cities {
   height: 95%;
   display: -webkit-box;
