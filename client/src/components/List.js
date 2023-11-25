@@ -20,7 +20,8 @@ function List({ listActive, setListActive, allUserLocations, setAllUserLocations
 
         {isSearchActive ? <SearchCities allUserLocations={allUserLocations} setAllUserLocations={setAllUserLocations} /> : (
           <VisitedCities 
-          allUserLocations={allUserLocations} 
+          allUserLocations={allUserLocations}
+          setAllUserLocations={setAllUserLocations} 
           userLocationsFiltered={userLocationsFiltered} 
           setUserLocationsFiltered={setUserLocationsFiltered} 
           />

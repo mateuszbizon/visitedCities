@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import villageImg from "../assets/village.jpg";
 import cityImg from "../assets/city.jpg";
 import { provinces, types } from '../constants/data';
+import { deleteLocationById } from '../api';
+import { useNotification } from '../context/NotifiactionContext';
+import * as messages from "../constants/messages";
 
-function VisitedCities({ allUserLocations, userLocationsFiltered, setUserLocationsFiltered }) {
+function VisitedCities({ allUserLocations, setAllUserLocations, userLocationsFiltered, setUserLocationsFiltered }) {
     const [selectedCity, setSelectedCity] = useState({ id: null, index: null });
     const [filteredValues, setFilteredValues] = useState({ type: "all", province: "all" });
+    const [isLoading, setIsLoading] = useState(false);
+    const { showNotification, showErrorNotification } = useNotification();
 
     function clearSelectedCity() {
         setSelectedCity({ ...selectedCity, id: null, index: null });
@@ -19,6 +24,26 @@ function VisitedCities({ allUserLocations, userLocationsFiltered, setUserLocatio
         }
 
         setSelectedCity({ ...selectedCity, id: city.id, index: cityIndex });
+    }
+
+    function handleDeleteLocation() {
+        setIsLoading(true);
+
+        deleteLocationById(selectedCity.id)
+            .then(() => {
+                setIsLoading(false);
+
+                const updatedAllUserLocations = allUserLocations.filter(location => location.id !== selectedCity.id)
+
+                setAllUserLocations([...updatedAllUserLocations]);
+                clearSelectedCity();
+
+                showNotification(messages.deletedLocationSuccessMessage);
+            })
+            .catch(() => {
+                setIsLoading(false);
+                showErrorNotification(messages.deletedLocationFailMessage);
+            })
     }
 
     function onChange(e) {
@@ -78,7 +103,7 @@ function VisitedCities({ allUserLocations, userLocationsFiltered, setUserLocatio
                 </div>
             ))}
         </div>
-        <button className="visited-cities__delete-place-btn" disabled={!selectedCity.id}>Usuń miejsce</button>
+        <button className="visited-cities__delete-place-btn" disabled={!selectedCity.id || isLoading} onClick={handleDeleteLocation}>Usuń miejsce</button>
     </div>
   )
 }

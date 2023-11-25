@@ -34,3 +34,7 @@ export async function getAllUserLocations() {
 
 	return data;
 }
+
+export async function deleteLocationById(locationId) {
+	await API.delete(`/api/Visit/Unvisit/${locationId}`);
+}

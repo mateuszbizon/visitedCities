@@ -8,3 +8,6 @@ export const searchCitiesFailMessage = "Nie można wyszukać miejsc. Spróbuj po
 export const logoutSuccessMessage = "Wylogowano pomyślnie";
 
 export const getAllUserLocationsFailMessage = "Nie można wyświetlić miejsc. Spróbuj ponownie później";
+
+export const deletedLocationSuccessMessage = "Usunięto miejsce pomyślnie";
+export const deletedLocationFailMessage = "Nie można usunąć miejsca. Spróbuj ponownie później";
