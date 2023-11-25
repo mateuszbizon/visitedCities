@@ -13,6 +13,7 @@
             services.AddScoped(typeof(IAccountService), typeof(AccountService));
             services.AddScoped(typeof(ILocationsService), typeof(LocationsService));
             services.AddScoped(typeof(ILocationMapper), typeof(LocationMapper));
+            services.AddScoped(typeof(IVisitService), typeof(VisitService));
         }
 
         public static void ConfigureDatabase(WebApplicationBuilder builder)

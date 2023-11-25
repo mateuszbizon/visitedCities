@@ -3,7 +3,6 @@ using VisitedCitiesApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -11,6 +10,8 @@ ServicesConfigurator.ConfigureSwagger(builder);
 ServicesConfigurator.ConfigureDatabase(builder);
 ServicesConfigurator.ConfigureIdentity(builder);
 ServicesConfigurator.ConfigureServices(builder.Services);
+
+builder.Services.AddScoped(sp => new HttpClient());
 
 builder.Services.AddCors(options =>
 {
