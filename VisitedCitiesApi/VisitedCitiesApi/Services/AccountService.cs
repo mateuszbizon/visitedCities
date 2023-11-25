@@ -53,6 +53,9 @@
                 User = _mapper.MapToClientModel(user)
             };
 
+            var userProfilePicture = decodedToken.Claims.FirstOrDefault(c => c.Type == "picture").Value;
+            loginUserResponse.User.ProfilePictureLink = userProfilePicture;
+
             return ServiceResponse<UserLoginResponse>.Success(loginUserResponse, "Login with google successful.");
         }
 
