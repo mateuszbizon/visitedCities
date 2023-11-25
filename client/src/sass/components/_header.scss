@@ -3,6 +3,7 @@
 @use "../abstract/mixins" as *;
 
 .map-header {
+    position: relative;
     height: $map-header-height;
     background-color: #fff;
     padding: 0 15px;
@@ -18,6 +19,8 @@
 
     &__logo {
         color: $main-color;
+        font-size: 25px;
+        font-weight: bold;
     }
 
     &__right-side {
@@ -26,6 +29,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        gap: 15px;
     }
 
     &__btn {
@@ -54,11 +58,32 @@
             @include underline;
         }
     }
+
+    &__user-profile-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+
+    &__user-modal {
+        position: absolute;
+        bottom: -50px;
+        right: 10px;
+        background-color: #fff;
+        width: 300px;
+        z-index: 100;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #000;
+        border-radius: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media (min-width: 768px) {
     .map-header {
-        padding: 0 80px;
+        padding: 0 50px;
 
         &__logout-btn {
             display: none;
