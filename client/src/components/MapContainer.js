@@ -1,7 +1,7 @@
 import React from 'react';
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api"
 
-function MapContainer({ userLocationsFiltered }) {
+function MapContainer({ userLocationsFiltered, setClickedPlace }) {
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API
     })
@@ -17,7 +17,7 @@ function MapContainer({ userLocationsFiltered }) {
                 mapContainerStyle={{ width: '100%', height: '100%' }}
             >
                 {userLocationsFiltered.map((place, index) => (
-                    <Marker key={index} position={{ lat: place.latitude, lng: place.longitude }} onClick={() => console.log(place)} />
+                    <Marker key={index} position={{ lat: place.latitude, lng: place.longitude }} onClick={() => setClickedPlace(place)} />
                 ))}
             </GoogleMap>
         </div>

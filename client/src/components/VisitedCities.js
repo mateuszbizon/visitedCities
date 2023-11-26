@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import villageImg from "../assets/village.jpg";
 import cityImg from "../assets/city.jpg";
 import { provinces, types } from '../constants/data';
@@ -6,11 +6,19 @@ import { deleteLocationById } from '../api';
 import { useNotification } from '../context/NotifiactionContext';
 import * as messages from "../constants/messages";
 
-function VisitedCities({ allUserLocations, setAllUserLocations, userLocationsFiltered, setUserLocationsFiltered }) {
+function VisitedCities({ 
+    allUserLocations, 
+    setAllUserLocations, 
+    userLocationsFiltered, 
+    setUserLocationsFiltered, 
+    clickedPlace, 
+    setClickedPlace 
+    }) {
     const [selectedCity, setSelectedCity] = useState({ id: null, index: null });
     const [filteredValues, setFilteredValues] = useState({ type: "all", province: "all" });
     const [isLoading, setIsLoading] = useState(false);
     const { showNotification, showErrorNotification } = useNotification();
+    const placesRef = useRef(null);
 
     function clearSelectedCity() {
         setSelectedCity({ ...selectedCity, id: null, index: null });
@@ -62,11 +70,30 @@ function VisitedCities({ allUserLocations, setAllUserLocations, userLocationsFil
         }
 
         setUserLocationsFiltered(updatedUserLocationsFiltered);
+        setClickedPlace(null);
+    }
+
+    function scrollToPlace() {
+        const placesElement = placesRef.current;
+
+        if (placesElement) {
+            const placeElement = placesElement.querySelector(`#place-${clickedPlace.id}`);
+
+            if (placeElement) {
+                placeElement.scrollIntoView(({ behavior: "smooth" }));
+            }
+        }
     }
 
     useEffect(() => {
         filterUserLocations();
     }, [filteredValues, allUserLocations])
+
+    useEffect(() => {
+        if (clickedPlace) {
+            scrollToPlace();
+        }
+    }, [clickedPlace])
 
   return (
     <div className='visited-cities'>
@@ -80,13 +107,13 @@ function VisitedCities({ allUserLocations, setAllUserLocations, userLocationsFil
                 <option key={index} value={type.value}>{type.text}</option>
             ))}
         </select>
-        <div className="visited-cities__content">
+        <div className="visited-cities__content" ref={placesRef}>
             {!userLocationsFiltered.length ? (
                 <p className='visited-cities__content-message'>Nie znaleziono odwiedzonych miejsc</p>
             ) : (
                 <>
                     {userLocationsFiltered.map((place, index) => (
-                        <div key={index} className={index === selectedCity.index ? "visited-cities__place visited-cities__place--selected" : "visited-cities__place"} onClick={() => toggleSelectedCity(place, index)}>
+                        <div key={index} id={`place-${place.id}`} className={index === selectedCity.index ? "visited-cities__place visited-cities__place--selected" : "visited-cities__place"} onClick={() => toggleSelectedCity(place, index)}>
                             <img 
                                 src={place.type === "village" ? villageImg : cityImg} 
                                 alt={place.type === "village" ? "Zdjęcie ukazujące wieś" : "Zdjęcie ukazujące misato"} 

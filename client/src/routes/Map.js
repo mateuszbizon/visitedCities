@@ -10,6 +10,7 @@ function Map() {
     const [listActive, setListActive] = useState(false);
     const [allUserLocations, setAllUserLocations] = useState([]);
     const [userLocationsFiltered, setUserLocationsFiltered] = useState([]);
+    const [clickedPlace, setClickedPlace] = useState(null);
     const { showErrorNotification } = useNotification();
 
     function handleGetAllUserLocations() {
@@ -39,8 +40,10 @@ function Map() {
              setAllUserLocations={setAllUserLocations} 
              userLocationsFiltered={userLocationsFiltered}
              setUserLocationsFiltered={setUserLocationsFiltered}
+             clickedPlace={clickedPlace}
+             setClickedPlace={setClickedPlace}
              />
-            <MapContainer userLocationsFiltered={userLocationsFiltered} />
+            <MapContainer userLocationsFiltered={userLocationsFiltered} setClickedPlace={setClickedPlace} />
         </div>
     </div>
   )

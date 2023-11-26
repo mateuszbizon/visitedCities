@@ -2,7 +2,16 @@ import React, { useState, useEffect } from 'react';
 import SearchCities from './SearchCities';
 import VisitedCities from './VisitedCities';
 
-function List({ listActive, setListActive, allUserLocations, setAllUserLocations, userLocationsFiltered, setUserLocationsFiltered }) {
+function List({ 
+  listActive, 
+  setListActive, 
+  allUserLocations, 
+  setAllUserLocations, 
+  userLocationsFiltered, 
+  setUserLocationsFiltered, 
+  clickedPlace, 
+  setClickedPlace 
+}) {
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   useEffect(() => {
@@ -23,7 +32,9 @@ function List({ listActive, setListActive, allUserLocations, setAllUserLocations
           allUserLocations={allUserLocations}
           setAllUserLocations={setAllUserLocations} 
           userLocationsFiltered={userLocationsFiltered} 
-          setUserLocationsFiltered={setUserLocationsFiltered} 
+          setUserLocationsFiltered={setUserLocationsFiltered}
+          clickedPlace={clickedPlace}
+          setClickedPlace={setClickedPlace}
           />
         )}
     </div>
