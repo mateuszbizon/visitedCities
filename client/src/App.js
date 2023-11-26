@@ -3,7 +3,9 @@ import Map from "./routes/Map";
 import Notification from "./components/Notification";
 import { NotificationProvider } from "./context/NotifiactionContext";
 import Login from "./routes/Login";
+import AuthRoutes from "./utils/AuthRoutes";
 import "./css/index.css";
+
 
 function App() {
 	return (
@@ -11,7 +13,9 @@ function App() {
 			<Router>
 				<Notification />
 				<Routes>
-					<Route path="/map" element={<Map />} />
+					<Route element={<AuthRoutes />} >
+						<Route path="/map" element={<Map />} />
+					</Route>
 					<Route path="/login" element={<Login />} />
 				</Routes>
 			</Router>

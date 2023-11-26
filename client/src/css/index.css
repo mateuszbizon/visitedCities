@@ -39,6 +39,7 @@
   color: #039dff;
   font-size: 25px;
   font-weight: bold;
+  text-decoration: none;
 }
 .map-header__right-side {
   width: 50%;
@@ -425,4 +426,8 @@
           box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
 }/*# sourceMappingURL=index.css.map */

@@ -33,7 +33,7 @@ function Header({ listActive, setListActive }) {
             <button className='map-header__btn' onClick={handleListActive}>
                 <i className="fa-solid fa-bars" aria-label='burger ikonka do otwierania bocznego menu'></i>
             </button>
-            <span className='map-header__logo'>visitedCities</span>
+            <a href='/' className='map-header__logo'>visitedCities</a>
         </div>
         <div className="map-header__right-side">
             <button className='map-header__btn-link' onClick={logout}>Wyloguj się</button>
