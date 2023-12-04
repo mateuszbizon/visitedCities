@@ -12,11 +12,11 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-export async function getLocationsBySearch(value) {
+export async function getLocationsBySearch(value, exactMatch) {
 	const requestData = {
 		name: value,
 		locationSearchParameters: {
-			exactMatch: false,
+			exactMatch: exactMatch,
 		},
 	};
 	

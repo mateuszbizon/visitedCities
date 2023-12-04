@@ -5,16 +5,19 @@ import * as messages from "../constants/messages";
 
 function SearchCities({ allUserLocations, setAllUserLocations }) {
     const [searchValue, setSearchValue] = useState("");
+    const [exactMatch, setExactMatch] = useState(false);
     const [searchedCities, setSearchedCities] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedCity, setSelectedCity] = useState({ id: null, index: null, city: null });
     const { showNotification, showErrorNotification } = useNotification();
 
-    function handleGetLocationsBySearch() {
+    function handleGetLocationsBySearch(e) {
+        e.preventDefault();
+
         if (searchValue === "") return;
 
         setIsLoading(true);
-        getLocationsBySearch(searchValue)
+        getLocationsBySearch(searchValue, exactMatch)
             .then(data => {
                 setSearchedCities([...data.content]);
 
@@ -71,10 +74,20 @@ function SearchCities({ allUserLocations, setAllUserLocations }) {
             })
     }
 
+    function changeCheckbox() {
+        setExactMatch(!exactMatch);
+    }
+
   return (
     <div className='search-cities'>
-        <input className='search-cities__input' type='text' onChange={(e) => setSearchValue(e.target.value)} value={searchValue} placeholder='Szukaj miasta' />
-        <button className='search-cities__search-btn' onClick={handleGetLocationsBySearch} disabled={isLoading || searchValue === ""}>Szukaj</button>
+        <form>
+            <input className='search-cities__input' type='text' onChange={(e) => setSearchValue(e.target.value)} value={searchValue} placeholder='Szukaj miasta' />
+            <div className='search-cities__form-row-checkbox'>
+                <input id='exact-match' className='search-cities__checkbox' type='checkbox' checked={exactMatch} onChange={changeCheckbox} />
+                <label htmlFor="exact-match">Wyszukiwanie dokładne</label>
+            </div>
+            <button className='search-cities__search-btn' onClick={handleGetLocationsBySearch} disabled={isLoading || searchValue === ""}>Szukaj</button>
+        </form>
         <div className='search-cities__content'>
             {searchedCities.map((city, index) => (
                 <div 
