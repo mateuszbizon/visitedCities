@@ -33,11 +33,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 .map-header__logo {
   color: #039dff;
-  font-size: 25px;
+  font-size: 21px;
   font-weight: bold;
   text-decoration: none;
 }
