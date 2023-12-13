@@ -1,0 +1,47 @@
+@use "../abstract/colors" as *;
+@use "../abstract/mixins" as *;
+@use "../abstract/variables" as *;
+
+.notification, .notification-error {
+    position: fixed;
+    top: calc($map-header-height + 10px);
+    left: -100%;
+    z-index: 100;
+    width: 200px;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    transition: left .7s ease-in-out;
+
+    &__time-status {
+        margin-top: 15px;
+        height: 5px;
+        width: 0;
+        background-color: #fff;
+        border-radius: 8px;
+        animation: time-status 3s .7s forwards;
+    }
+}
+
+.notification {
+    background-color: $notification-success;
+}
+
+.notification-error {
+    background-color: $notification-fail;
+}
+
+.show-notification {
+    left: 5px;
+}
+
+@keyframes time-status {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}

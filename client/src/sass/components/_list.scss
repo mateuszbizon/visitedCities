@@ -5,7 +5,7 @@
     position: absolute;
     left: -100%;
     top: 0;
-    width: 280px;
+    width: 320px;
     background-color: #fff;
     height: 100%;
     z-index: 10;
@@ -36,15 +36,18 @@
             @include underline;
         }
     }
+
+    &__no-user-message {
+        text-align: center;
+    }
 }
 
 .list-show {
     left: 0;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 576px) {
     .list {
-        position: sticky;
-        left: 0;
+        width: 400px;
     }
 }

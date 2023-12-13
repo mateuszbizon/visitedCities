@@ -10,10 +10,10 @@
     background-color: $main-color;
 }
 
-@mixin main-button {
+@mixin main-button($color, $color-hover, $color-disabled) {
     display: block;
     width: 100%;
-    background-color: $main-color;
+    background-color: $color;
     color: #fff;
     padding: 8px;
     font-size: 15px;
@@ -23,11 +23,18 @@
     transition: background-color .3s;
 
     &:hover {
-        background-color: $main-color-hover;
+        background-color: $color-hover;
     }
 
     &:disabled {
-        background-color: $main-color-disabled;
+        background-color: $color-disabled;
         cursor: not-allowed;
     }
+}
+
+@mixin input {
+    width: 100%;
+    padding: 8px 16px;
+    margin-bottom: 15px;
+    font-size: 15px;
 }
