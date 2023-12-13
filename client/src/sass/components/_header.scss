@@ -21,7 +21,6 @@
         color: $main-color;
         font-size: 21px;
         font-weight: bold;
-        text-decoration: none;
     }
 
     &__right-side {
@@ -86,7 +85,7 @@
     .map-header {
         padding: 0 50px;
 
-        &__logout-btn {
+        &__logout-btn, &__signin-btn {
             display: none;
         }
 

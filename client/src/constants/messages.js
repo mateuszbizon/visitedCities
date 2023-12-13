@@ -11,3 +11,5 @@ export const getAllUserLocationsFailMessage = "Nie można wyświetlić miejsc. S
 
 export const deletedLocationSuccessMessage = "Usunięto miejsce pomyślnie";
 export const deletedLocationFailMessage = "Nie można usunąć miejsca. Spróbuj ponownie później";
+
+export const loginFailMessage = "Nie udało się zalogować. Spróbuj ponownie później";

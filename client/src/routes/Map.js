@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import MapContainer from '../components/MapContainer';
 import List from '../components/List';
+import Shadow from '../components/Shadow';
+import LoginModal from '../components/LoginModal';
 import { getAllUserLocations } from '../api';
 import { useNotification } from '../context/NotifiactionContext';
 import * as messages from "../constants/messages";
+import { useUser } from '../context/UserContext';
 
 function Map() {
     const [listActive, setListActive] = useState(false);
     const [allUserLocations, setAllUserLocations] = useState([]);
     const [userLocationsFiltered, setUserLocationsFiltered] = useState([]);
     const [clickedPlace, setClickedPlace] = useState(null);
+    const [loginModalActive, setLoginModalActive] = useState(false);
     const { showErrorNotification } = useNotification();
+    const { user } = useUser();
 
     function handleGetAllUserLocations() {
       getAllUserLocations()
@@ -26,12 +31,20 @@ function Map() {
     }
 
     useEffect(() => {
-      handleGetAllUserLocations();
-    }, [])
+      console.log(user)
+      setAllUserLocations([]);
+      setUserLocationsFiltered([]);
+      
+      if (user) {
+        handleGetAllUserLocations();
+      }
+    }, [user])
 
   return (
     <div className='map'>
-        <Header listActive={listActive} setListActive={setListActive} />
+        <Shadow loginModalActive={loginModalActive} setLoginModalActive={setLoginModalActive} />
+        <LoginModal loginModalActive={loginModalActive} setLoginModalActive={setLoginModalActive} />
+        <Header listActive={listActive} setListActive={setListActive} setLoginModalActive={setLoginModalActive} />
         <div className='map-main-box'>
             <List
              listActive={listActive} 

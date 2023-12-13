@@ -36,6 +36,10 @@
             @include underline;
         }
     }
+
+    &__no-user-message {
+        text-align: center;
+    }
 }
 
 .list-show {

@@ -12,6 +12,16 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
+export async function googleLogin(token) {
+	const requestData = {
+		token: token
+	}
+
+	const { data } = await API.post("/api/Account/GoogleExternalLogin", requestData);
+
+	return data;
+}
+
 export async function getLocationsBySearch(value, exactMatch) {
 	const requestData = {
 		name: value,
