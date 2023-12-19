@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("corspolicy",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://visited-cities.netlify.app/")
+            policy.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://visited-cities.netlify.app")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials();
