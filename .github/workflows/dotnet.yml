@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      Solution_Name: VisitedCitiesApi.sln                         
+      Solution_Name: VisitedCitiesApi\VisitedCitiesApi.sln                         
       Test_Project_Path: VisitedCitiesApi\VisitedCitiesApiTests\VisitedCitiesApiTests.csproj
 
     steps:
