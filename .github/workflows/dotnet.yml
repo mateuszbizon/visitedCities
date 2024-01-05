@@ -13,6 +13,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    env:
+      Solution_Name: VisitedCitiesApi.sln                         
+      Test_Project_Path: VisitedCitiesApi\VisitedCitiesApiTests\VisitedCitiesApiTests.csproj
 
     steps:
     - uses: actions/checkout@v3
