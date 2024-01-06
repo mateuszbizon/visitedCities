@@ -49,13 +49,17 @@
     "@babel/preset-env": "^7.23.7",
     "@babel/preset-react": "^7.23.3"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest"
+
+    "jest": {
+      "transform": {
+        "^.+\\.jsx?$": "babel-jest"
+      },
+      "moduleNameMapper": {
+        "^axios$": "<rootDir>/__mocks__/axios.js"
+      }
     }
   }
   
-  }
   
   
 
