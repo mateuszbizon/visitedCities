@@ -50,14 +50,16 @@
     "@babel/preset-react": "^7.23.3"
   },
 
-    "jest": {
-      "transform": {
-        "^.+\\.jsx?$": "babel-jest"
-      },
-      "moduleNameMapper": {
-        "^axios$": "<rootDir>/__mocks__/axios.js"
-      }
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "globals": {
+      "NODE_ENV": "test"
     }
+  }
+  
+  
   }
   
   
