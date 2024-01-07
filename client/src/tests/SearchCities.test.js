@@ -17,7 +17,6 @@ describe('SearchCities component', () => {
     });
   });
 
-  // Mock axios and its create function
   jest.mock('axios', () => ({
     create: jest.fn(() => ({
       get: jest.fn(() => Promise.resolve({})),
@@ -25,9 +24,6 @@ describe('SearchCities component', () => {
     })),
   }));
   
-  
-
-  // Mock specific functions from your API module
   jest.mock('../api/index', () => ({
     getLocationsBySearch: jest.fn(),
     addNewLocationById: jest.fn(),

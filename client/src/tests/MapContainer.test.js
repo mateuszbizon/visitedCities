@@ -3,7 +3,7 @@ import { render, waitFor, cleanup } from '@testing-library/react';
 import MapContainer from '../components/MapContainer';
 
 describe('MapContainer Component', () => {
-  afterEach(cleanup); // Czyszczenie po każdym teście
+  afterEach(cleanup); 
 
   it('renders map with markers correctly', async () => {
     const userLocationsFiltered = [
@@ -11,7 +11,7 @@ describe('MapContainer Component', () => {
       { latitude: 53, longitude: 22, name: 'Location 2' },
     ];
 
-    const setClickedPlace = jest.fn(); // Mockowanie funkcji setClickedPlace
+    const setClickedPlace = jest.fn(); 
 
     const { getByText, getByTestId, queryByText } = render(
       <MapContainer userLocationsFiltered={userLocationsFiltered} setClickedPlace={setClickedPlace} />
